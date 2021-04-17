@@ -52,6 +52,7 @@ namespace AppForTrainings.Data
             coachInDb.PhoneNumber = coach.PhoneNumber;
             coachInDb.Email = coach.Email;
             coachInDb.Experience = coach.Experience;
+            coachInDb.Trainings = coach.Trainings;
 
             _trainingContext.Attach(coachInDb).State = EntityState.Modified;
             await _trainingContext.SaveChangesAsync();

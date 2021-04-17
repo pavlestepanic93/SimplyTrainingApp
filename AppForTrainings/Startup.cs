@@ -35,8 +35,10 @@ namespace AppForTrainings
             });
 
             services.AddDbContext<TrainingCampContext>(option => option.UseSqlServer(Configuration.GetConnectionString("TrainingCampDb")));
-
             services.AddScoped<ICoachRepository, CoachRepository>();
+            services.AddScoped<IMemberRepository, MemberRepository>();
+            services.AddScoped<ISportRepository, SportRepository>();
+            services.AddScoped<ITrainingRepository, TrainingRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -49,9 +51,7 @@ namespace AppForTrainings
             }
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
