@@ -12,6 +12,7 @@ namespace AppForTrainings.Models
         public int TrainingID { get; set; }
         [Required]
         public DateTime TimeAndDateOfTraining { get; set; }
+
         public Coach Coach { get; set; }
         public Member Member { get; set; }
         public Sport Sport { get; set; }

@@ -18,6 +18,7 @@ namespace AppForTrainings.Models
         public string Difficult { get; set; }
         [Required]
         public string MonthlyMembershipFee { get; set; }
+
         public ICollection<Training> Trainings { get; set; }
     }
 }

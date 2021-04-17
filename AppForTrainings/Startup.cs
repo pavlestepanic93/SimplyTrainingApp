@@ -1,3 +1,4 @@
+using AppForTrainings.Data;
 using AppForTrainings.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +25,6 @@ namespace AppForTrainings
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -35,9 +35,10 @@ namespace AppForTrainings
             });
 
             services.AddDbContext<TrainingCampContext>(option => option.UseSqlServer(Configuration.GetConnectionString("TrainingCampDb")));
+
+            services.AddScoped<ICoachRepository, CoachRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

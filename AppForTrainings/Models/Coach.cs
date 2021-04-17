@@ -18,6 +18,7 @@ namespace AppForTrainings.Models
         public string Email { get; set; }
         [Required]
         public string Experience { get; set; }
+
         public ICollection<Training> Trainings { get; set; }
     }
 }
