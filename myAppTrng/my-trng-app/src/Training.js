@@ -161,8 +161,8 @@ export class Training extends Component{
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            {this.state.members.length > 0 ? this.state.members.map(ele => {
-                                return <Dropdown.Item onClick={() => this.setState({memberName: ele?.FullName, memberObject: ele})}>{ele?.FullName}</Dropdown.Item>
+                            {this.state.members.length > 0 ? this.state.members.map((ele,index) => {
+                                return <Dropdown.Item key={index} onClick={() => this.setState({memberName: ele?.FullName, memberObject: ele})}>{ele?.FullName}</Dropdown.Item>
                             }) : null} 
                         </Dropdown.Menu>
                     </Dropdown>
@@ -173,8 +173,8 @@ export class Training extends Component{
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            {this.state.coaches.length > 0 ? this.state.coaches.map(ele => {
-                                return <Dropdown.Item onClick={() => this.setState({coachName: ele?.FullName, coachObject: ele})}>{ele?.FullName}</Dropdown.Item>
+                            {this.state.coaches.length > 0 ? this.state.coaches.map((ele, index) => {
+                                return <Dropdown.Item key={index} onClick={() => this.setState({coachName: ele?.FullName, coachObject: ele})}>{ele?.FullName}</Dropdown.Item>
                             }) : null} 
                         </Dropdown.Menu>
                     </Dropdown>
@@ -185,8 +185,8 @@ export class Training extends Component{
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            {this.state.sports.length > 0 ? this.state.sports.map(ele => {
-                                return <Dropdown.Item onClick={() => this.setState({sportName: ele?.SportsName, sportObject: ele})}>{ele?.SportsName}</Dropdown.Item>
+                            {this.state.sports.length > 0 ? this.state.sports.map((ele, index) => {
+                                return <Dropdown.Item key={index} onClick={() => this.setState({sportName: ele?.SportsName, sportObject: ele})}>{ele?.SportsName}</Dropdown.Item>
                             }) : null} 
                         </Dropdown.Menu>
                     </Dropdown>

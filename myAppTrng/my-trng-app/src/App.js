@@ -18,25 +18,25 @@ class App extends React.Component{
     return (
       <div className="container">
         <Router>
-          <Link className = "linkcss" exact to="/"> Training</Link>
-          <Link className = "linkcss" exact to="/member"> Member</Link>
-          <Link className = "linkcss" exact to="/coach"> Coach</Link>
-          <Link className = "linkcss" exact to="/sport"> Sport</Link>
+          <Link className = "linkcss" to="/"> Training</Link>
+          <Link className = "linkcss" to="/member"> Member</Link>
+          <Link className = "linkcss" to="/coach"> Coach</Link>
+          <Link className = "linkcss" to="/sport"> Sport</Link>
        
       <Switch>
           <Route exact path="/"  >
             <Training />
           </Route>
 
-          <Route exact path="/member"  >
+          <Route path="/member"  >
             <Member />
           </Route>
 
-          <Route exact path="/coach"  >
+          <Route path="/coach"  >
             <Coach />
           </Route>
 
-          <Route exact path="/sport"  >
+          <Route path="/sport"  >
             <Sport />
           </Route>
       </Switch>
