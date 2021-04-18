@@ -19,7 +19,9 @@ namespace AppForTrainings.Data
 
         public ActionResult<IEnumerable<Member>> Get()
         {
-            var members = _trainingContext.Members.ToList();
+            var members = _trainingContext.Members
+                            .Include(t => t.Trainings)
+                            .ToList();
             return members;
         }
 
@@ -74,6 +76,17 @@ namespace AppForTrainings.Data
 
             _trainingContext.Members.Remove(member);
             await _trainingContext.SaveChangesAsync();
+        }
+
+        public Member GetById(int id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            Member member = _trainingContext.Members.FirstOrDefault(m => m.MemberID == id);
+
+            return member;
         }
     }
 }

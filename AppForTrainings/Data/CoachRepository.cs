@@ -19,7 +19,9 @@ namespace AppForTrainings.Data
 
         public ActionResult<IEnumerable<Coach>> Get()
         {
-            var coaches = _trainingContext.Coaches.ToList();
+            var coaches = _trainingContext.Coaches
+                .Include(t => t.Trainings)
+                .ToList();
             return coaches;
         }
 
@@ -74,6 +76,17 @@ namespace AppForTrainings.Data
 
             _trainingContext.Coaches.Remove(coach);
             await _trainingContext.SaveChangesAsync();
+        }
+
+        public Coach GetById(int id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            Coach coach = _trainingContext.Coaches.FirstOrDefault(c => c.CoachID == id);
+
+            return coach;
         }
     }
 }

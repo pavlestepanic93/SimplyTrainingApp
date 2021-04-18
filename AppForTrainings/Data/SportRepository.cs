@@ -20,7 +20,9 @@ namespace AppForTrainings.Data
 
         public ActionResult<IEnumerable<Sport>> Get()
         {
-            var sports = _trainingContext.Sports.ToList();
+            var sports = _trainingContext.Sports
+                .Include(t => t.Trainings)
+                .ToList();
             return sports;
         }
 
@@ -75,6 +77,17 @@ namespace AppForTrainings.Data
 
             _trainingContext.Sports.Remove(sport);
             await _trainingContext.SaveChangesAsync();
+        }
+
+        public Sport GetById(int id)
+        {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+            Sport sport = _trainingContext.Sports.FirstOrDefault(s => s.SportID == id);
+
+            return sport;
         }
     }
 }

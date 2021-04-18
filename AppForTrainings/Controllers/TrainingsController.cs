@@ -14,10 +14,16 @@ namespace AppForTrainings.Controllers
     public class TrainingsController : ControllerBase
     {
         private readonly ITrainingRepository _trainingRepo;
+        private readonly ICoachRepository _coachRepo;
+        private readonly ISportRepository _sportRepo;
+        private readonly IMemberRepository _memberRepo;
 
-        public TrainingsController(ITrainingRepository repo)
+        public TrainingsController(ITrainingRepository repo, ICoachRepository repoCoach, ISportRepository repoSport, IMemberRepository repoMember)
         {
             _trainingRepo = repo;
+            _coachRepo = repoCoach;
+            _sportRepo = repoSport;
+            _memberRepo = repoMember;
         }
 
         [HttpGet]
@@ -34,8 +40,20 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for training");
             }
-            await _trainingRepo.Post(training);
-            return Ok("Added training");
+            var tmpCoach = _coachRepo.GetById(training.Coach.CoachID);
+            var tmpSport = _sportRepo.GetById(training.Sport.SportID);
+            var tmpMember = _memberRepo.GetById(training.Member.MemberID);
+
+            Training trainingTmp = new Training()
+            {
+                Coach = tmpCoach,
+                Sport = tmpSport,
+                Member = tmpMember,
+                TimeAndDateOfTraining = training.TimeAndDateOfTraining
+            };
+
+            await _trainingRepo.Post(trainingTmp);
+            return Ok(trainingTmp);
         }
 
         [HttpPut]
@@ -58,7 +76,7 @@ namespace AppForTrainings.Controllers
                 return NotFound("Getting null for training");
             }
             await _trainingRepo.Delete(id);
-            return Ok("Deleted training");
+            return Ok(id);
         }
     }
 }

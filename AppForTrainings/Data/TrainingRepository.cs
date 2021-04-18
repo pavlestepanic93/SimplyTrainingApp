@@ -19,7 +19,11 @@ namespace AppForTrainings.Data
 
         public ActionResult<IEnumerable<Training>> Get()
         {
-            var trainings = _trainingContext.Trainings.ToList();
+            var trainings = _trainingContext.Trainings
+                .Include(c => c.Coach)
+                .Include(m => m.Member)
+                .Include(s => s.Sport)
+                .ToList();
             return trainings;
         }
 
@@ -29,7 +33,6 @@ namespace AppForTrainings.Data
             {
                 throw new ArgumentNullException(nameof(training));
             }
-
             await _trainingContext.Trainings.AddAsync(training);
             await _trainingContext.SaveChangesAsync();
         }

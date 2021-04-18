@@ -60,5 +60,6 @@ namespace AppForTrainings.Controllers
             await _coachRepo.Delete(id);
             return Ok("Deleted coach");
         }
+
     }
 }
