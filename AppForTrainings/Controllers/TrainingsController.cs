@@ -40,6 +40,7 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for training");
             }
+
             var tmpCoach = _coachRepo.GetById(training.Coach.CoachID);
             var tmpSport = _sportRepo.GetById(training.Sport.SportID);
             var tmpMember = _memberRepo.GetById(training.Member.MemberID);
@@ -51,6 +52,11 @@ namespace AppForTrainings.Controllers
                 Member = tmpMember,
                 TimeAndDateOfTraining = training.TimeAndDateOfTraining
             };
+
+            if (trainingTmp == null)
+            {
+                return NotFound("Getting null for trainingTmp");
+            }
 
             await _trainingRepo.Post(trainingTmp);
             return Ok(trainingTmp);

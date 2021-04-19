@@ -34,6 +34,7 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for sport");
             }
+
             await _sportRepo.Post(sport);
             return Ok("Added sport");
         }
@@ -57,6 +58,7 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for sport");
             }
+
             await _sportRepo.Delete(id);
             return Ok("Deleted sport");
         }

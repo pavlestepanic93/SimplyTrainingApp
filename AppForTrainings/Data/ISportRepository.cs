@@ -11,7 +11,7 @@ namespace AppForTrainings.Data
     {
         ActionResult<IEnumerable<Sport>> Get();
 
-        Sport GetById(int id);
+        Sport GetById(int? id);
 
         Task Post(Sport sport);
 

@@ -11,7 +11,7 @@ namespace AppForTrainings.Data
     {
         ActionResult<IEnumerable<Coach>> Get();
 
-        Coach GetById(int id);
+        Coach GetById(int? id);
 
         Task Post(Coach coach);
 

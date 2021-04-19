@@ -34,6 +34,7 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for member");
             }
+
             await _memberRepo.Post(member);
             return Ok("Added member");
         }
@@ -57,6 +58,7 @@ namespace AppForTrainings.Controllers
             {
                 return NotFound("Getting null for member");
             }
+
             await _memberRepo.Delete(id);
             return Ok("Deleted member");
         }

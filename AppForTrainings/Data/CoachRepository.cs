@@ -78,13 +78,19 @@ namespace AppForTrainings.Data
             await _trainingContext.SaveChangesAsync();
         }
 
-        public Coach GetById(int id)
+        public Coach GetById(int? id)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
+
             Coach coach = _trainingContext.Coaches.FirstOrDefault(c => c.CoachID == id);
+
+            if(coach == null)
+            {
+                throw new ArgumentNullException(nameof(coach));
+            }
 
             return coach;
         }

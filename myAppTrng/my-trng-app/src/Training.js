@@ -57,10 +57,6 @@ export class Training extends Component{
                 this.setState( {training:[...this.state.training, train] });
             }) 
     }
-    //...this.state.training, train ovo znaci da na ovo sto smo getovali dodajemo post NA KRAJ NIZA
-    //spredovanje
-    //da sam stavio train na pocetku pa spredovanje onda bi islo na pocetak
-
 
     getCoaches = () =>
     {

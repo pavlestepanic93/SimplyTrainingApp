@@ -33,6 +33,7 @@ namespace AppForTrainings.Data
             {
                 throw new ArgumentNullException(nameof(training));
             }
+
             await _trainingContext.Trainings.AddAsync(training);
             await _trainingContext.SaveChangesAsync();
         }
@@ -76,6 +77,19 @@ namespace AppForTrainings.Data
 
             _trainingContext.Trainings.Remove(training);
             await _trainingContext.SaveChangesAsync();
+        }
+
+        public Training GetById(int? id)
+        {
+
+            Training training = _trainingContext.Trainings.FirstOrDefault(t => t.TrainingID == id);
+
+            if (training == null)
+            {
+                throw new ArgumentNullException(nameof(training));
+            }
+
+            return training;
         }
     }
 }

@@ -11,6 +11,8 @@ namespace AppForTrainings.Data
     {
         ActionResult<IEnumerable<Training>> Get();
 
+        Training GetById(int? id);
+
         Task Post(Training training);
 
         Task Update(Training training);

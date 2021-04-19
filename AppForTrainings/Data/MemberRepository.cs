@@ -78,13 +78,19 @@ namespace AppForTrainings.Data
             await _trainingContext.SaveChangesAsync();
         }
 
-        public Member GetById(int id)
+        public Member GetById(int? id)
         {
             if (id == null)
             {
                 throw new ArgumentNullException(nameof(id));
             }
+
             Member member = _trainingContext.Members.FirstOrDefault(m => m.MemberID == id);
+
+            if (member == null)
+            {
+                throw new ArgumentNullException(nameof(member));
+            }
 
             return member;
         }
