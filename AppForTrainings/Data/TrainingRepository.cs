@@ -24,6 +24,7 @@ namespace AppForTrainings.Data
                 .Include(m => m.Member)
                 .Include(s => s.Sport)
                 .ToList();
+
             return trainings;
         }
 

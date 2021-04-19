@@ -36,7 +36,7 @@ namespace AppForTrainings.Controllers
             }
 
             await _sportRepo.Post(sport);
-            return Ok("Added sport");
+            return Ok(sport);
         }
 
         [HttpPut]

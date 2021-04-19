@@ -36,7 +36,7 @@ namespace AppForTrainings.Controllers
             }
 
             await _memberRepo.Post(member);
-            return Ok("Added member");
+            return Ok(member);
         }
 
         [HttpPut]

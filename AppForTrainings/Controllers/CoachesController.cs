@@ -36,7 +36,7 @@ namespace AppForTrainings.Controllers
             }
 
             await _coachRepo.Post(coach);
-            return Ok("Added coach");
+            return Ok(coach);
         }
 
         [HttpPut]

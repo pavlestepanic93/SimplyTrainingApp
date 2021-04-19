@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
-import {Table} from 'react-bootstrap';
 import axios from 'axios'
-import {Button, Modal, Dropdown} from "react-bootstrap";
+import {Table, Button, Modal, Dropdown} from "react-bootstrap";
 import DateTimePicker from 'react-datetime-picker';
 import { dataTime } from "./datatime"
 
@@ -41,20 +40,19 @@ export class Training extends Component{
             this.getSports();
     }
 
-    createTraining = (data) =>
+    getMembers = () =>
     {
         axios({
-            method: "POST",
+            method: "GET",
             header: {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            url: `http://localhost:62936/api/trainings`,
-            data: data
+            url: `http://localhost:62936/api/members`
         }).then(response => 
             {   
-                const train = response.data;
-                this.setState( {training:[...this.state.training, train] });
+                const member = response.data.Value;
+                this.setState( {members: member});
             }) 
     }
 
@@ -74,22 +72,6 @@ export class Training extends Component{
             }) 
     }
 
-    getMembers = () =>
-    {
-        axios({
-            method: "GET",
-            header: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-            url: `http://localhost:62936/api/members`
-        }).then(response => 
-            {   
-                const member = response.data.Value;
-                this.setState( {members: member});
-            }) 
-    }
-
     getSports = () =>
     {
         axios({
@@ -103,6 +85,23 @@ export class Training extends Component{
             {   
                 const sport = response.data.Value;
                 this.setState( {sports: sport});
+            }) 
+    }
+
+    createTraining = (data) =>
+    {
+        axios({
+            method: "POST",
+            header: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            url: `http://localhost:62936/api/trainings`,
+            data: data
+        }).then(response => 
+            {   
+                const train = response.data;
+                this.setState( {training:[...this.state.training, train] });
             }) 
     }
 
@@ -138,8 +137,7 @@ export class Training extends Component{
                                         sportObject: null})}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
-                    centered
-                    >
+                    centered>
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
                         Create Training
@@ -245,19 +243,18 @@ export class Training extends Component{
     </thead>
     <tbody>
         {this.state.training.length > 0 ?  this.state.training.map((ele, index) => {
-
             return <tr key={index}>
                 <td>{ele.Coach?.FullName}</td>
                 <td>{ele.Member?.FullName}</td>
                 <td>{ele.Sport?.SportsName}</td>
                 <td>{ele.TimeAndDateOfTraining}</td>
                 <th> <Button onClick={() => this.deleteTraining(ele.TrainingID)}variant="danger">Delete</Button></th>
-            </tr>
+                </tr>
         }) : null}    
         
     </tbody>
     </Table>
-     </>   )
+    </>)
     }
 }
 
