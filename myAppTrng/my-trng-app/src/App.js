@@ -18,10 +18,10 @@ class App extends React.Component{
     return (
       <div className="container">
         <Router>
-          <Link className = "linkcss" to="/"> Training</Link>
-          <Link className = "linkcss" to="/member"> Member</Link>
-          <Link className = "linkcss" to="/coach"> Coach</Link>
-          <Link className = "linkcss" to="/sport"> Sport</Link>
+          <Link className = "linkcss" to="/"> Trainings</Link>
+          <Link className = "linkcss" to="/member"> Members</Link>
+          <Link className = "linkcss" to="/coach"> Coaches</Link>
+          <Link className = "linkcss" to="/sport"> Sports</Link>
           
       <Switch>
           <Route exact path="/"  >

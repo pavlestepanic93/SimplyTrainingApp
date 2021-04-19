@@ -60,7 +60,9 @@ namespace AppForTrainings.Controllers
             }
 
             await _sportRepo.Delete(id);
-            return Ok("Deleted sport");
+            return Ok(id);
         }
+
+
     }
 }

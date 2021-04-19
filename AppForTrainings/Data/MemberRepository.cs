@@ -50,6 +50,7 @@ namespace AppForTrainings.Data
                 throw new ArgumentNullException(nameof(memberInDb));
             }
 
+            memberInDb.MemberID = member.MemberID;
             memberInDb.FullName = member.FullName;
             memberInDb.PhoneNumber = member.PhoneNumber;
             memberInDb.Email = member.Email;

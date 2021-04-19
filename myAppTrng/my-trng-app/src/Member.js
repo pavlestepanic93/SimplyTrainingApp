@@ -11,7 +11,9 @@ export class Member extends Component{
         memberPhoneNumber: "",
         memberEmail : "",
         memberMembershipType: "",
-        modalShow: false
+        memberIdTmp: 0,
+        modalShow: false,
+        createOrUpdate: ""
     }
 
     componentDidMount(){
@@ -41,9 +43,46 @@ export class Member extends Component{
             data: data
         }).then(response => 
             {   
-                console.log(response.data);
                 const member = response.data;
                 this.setState( {members:[...this.state.members, member] });
+            }) 
+    }
+
+    deleteMember = (data) =>
+    {
+        axios({
+            method: "DELETE",
+            header: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            url: `http://localhost:62936/api/members/${data}`
+        }).then(response => 
+            {   
+                const memberDel = response.data;
+                this.setState( {members: this.state.members.filter(el => el.MemberID !== memberDel)});
+            }) 
+    }
+
+    updateMember = (data) =>
+    {
+        axios({
+            method: "PUT",
+            header: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
+            url: `http://localhost:62936/api/members`,
+            data: data
+        }).then(response => 
+            {   
+                const member = response.data;
+                this.setState( {members: this.state.members.map(e => {
+                    if(e.MemberID === member.MemberID){
+                        return member;
+                    }
+                    return e;
+                })});
             }) 
     }
 
@@ -56,20 +95,21 @@ export class Member extends Component{
         return(
             <>
           <div style={{textAlign:"center", marginBottom: "10px"}}>
-                <Button  variant="success" onClick={() => this.setState({modalShow: true})}>Create new Member</Button> 
+                <Button  variant="success" onClick={() => this.setState({modalShow: true, createOrUpdate: "create"})}>Create new Member</Button> 
                 <Modal
                 show={this.state.modalShow}
                     onHide={() => this.setState({modalShow: false,
                                                 memberFullName : "",
                                                 memberPhoneNumber: "",
                                                 memberEmail : "",
-                                                memberMembershipType: ""})}
+                                                memberMembershipType: "",
+                                                createOrUpdate: ""})}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered>
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
-                        Create Member
+                        Create or Edit Member
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
@@ -108,12 +148,25 @@ export class Member extends Component{
                             window.alert("Please enter memebership type");
                         }
                         else{
+                            if(this.state.createOrUpdate === "create")
+                            {
                             this.createMember({
                                 FullName: this.state.memberFullName,
                                 PhoneNumber: this.state.memberPhoneNumber,
                                 Email: this.state.memberEmail,
                                 MembershipType: this.state.memberMembershipType
                             });
+                            }
+                            else if(this.state.createOrUpdate === "update")
+                            {
+                                this.updateMember({
+                                    MemberID: this.state.memberIdTmp,
+                                    FullName: this.state.memberFullName,
+                                    PhoneNumber: this.state.memberPhoneNumber,
+                                    Email: this.state.memberEmail,
+                                    MembershipType: this.state.memberMembershipType
+                                }); 
+                            }
                         }
 
                         this.setState({modalShow: false,
@@ -121,6 +174,7 @@ export class Member extends Component{
                             memberPhoneNumber: "",
                             memberEmail : "",
                             memberMembershipType: "",
+                            createOrUpdate: ""
                     })}}>Save</Button>
 
                     <Button variant="danger" onClick={() => this.setState({modalShow: false,
@@ -128,6 +182,7 @@ export class Member extends Component{
                                         memberPhoneNumber: "",
                                         memberEmail : "",
                                         memberMembershipType: "",
+                                        createOrUpdate: ""
                                 })}>Close</Button>
                     </Modal.Footer>
                 </Modal>
@@ -150,8 +205,14 @@ export class Member extends Component{
                         <td>{ele.PhoneNumber}</td>
                         <td>{ele.Email}</td>
                         <td>{ele.MembershipType}</td>
-                        <th> <Button>Edit</Button></th>
-                        <th> <Button>Delete</Button></th>
+                        <th> <Button  variant="success" onClick={() => this.setState({modalShow: true,
+                                                                                        createOrUpdate: "update",
+                                                                                        memberIdTmp : ele.MemberID,
+                                                                                        memberFullName : ele.FullName,
+                                                                                        memberPhoneNumber: ele.PhoneNumber,
+                                                                                        memberEmail : ele.Email,
+                                                                                        memberMembershipType: ele.MembershipType})}>Edit</Button></th>
+                        <th> <Button onClick={() => this.deleteMember(ele.MemberID)}variant="danger">Delete</Button></th>
                     </tr>
                 }) : null}    
                 
