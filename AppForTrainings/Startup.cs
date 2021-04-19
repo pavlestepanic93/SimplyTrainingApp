@@ -65,6 +65,7 @@ namespace AppForTrainings
             }
 
             app.UseRouting();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
