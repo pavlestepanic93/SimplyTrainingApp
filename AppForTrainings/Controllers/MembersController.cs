@@ -48,7 +48,7 @@ namespace AppForTrainings.Controllers
             }
 
             await _memberRepo.Update(member);
-            return Ok("Updated member");
+            return Ok(member);
         }
 
         [HttpDelete("{id}")]

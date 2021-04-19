@@ -48,7 +48,7 @@ namespace AppForTrainings.Controllers
             }
 
             await _sportRepo.Update(sport);
-            return Ok("Updated sport");
+            return Ok(sport);
         }
 
         [HttpDelete("{id}")]
