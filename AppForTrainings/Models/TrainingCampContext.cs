@@ -11,6 +11,7 @@ namespace AppForTrainings.Models
         public TrainingCampContext(DbContextOptions options) : base(options)
         {
         }
+
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Sport> Sports { get; set; }
