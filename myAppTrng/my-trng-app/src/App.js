@@ -22,7 +22,7 @@ class App extends React.Component{
           <Link className = "linkcss" to="/member"> Member</Link>
           <Link className = "linkcss" to="/coach"> Coach</Link>
           <Link className = "linkcss" to="/sport"> Sport</Link>
-       
+          
       <Switch>
           <Route exact path="/"  >
             <Training />
