@@ -13,11 +13,11 @@ export class Training extends Component{
         sports: [],
         modalShow: false,
         dateTime: new Date(),
-        coachName: "select coach",
+        coachName: "Select Coach",
         coachObject: null,
-        memberName : "select member",
+        memberName : "Select Member",
         memberObject: null,
-        sportName: "select sport",
+        sportName: "Select Sport",
         sportObject: null
     }
 
@@ -129,11 +129,11 @@ export class Training extends Component{
                 <Modal
                 show={this.state.modalShow}
                     onHide={() => this.setState({modalShow: false,  dateTime: new Date(),
-                                        coachName: "select coach",
+                                        coachName: "Select Coach",
                                         coachObject: null,
-                                        memberName : "select member",
+                                        memberName : "Select Member",
                                         memberObject: null,
-                                        sportName: "select sport",
+                                        sportName: "Select Sport",
                                         sportObject: null})}
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
@@ -144,25 +144,13 @@ export class Training extends Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <DateTimePicker
+                    <DateTimePicker 
                         onChange={(data) => {
                             this.setState({dateTime: data})
                         }}
                         value={this.state.dateTime}
                     />
-                    <Dropdown>
-                        <Dropdown.Toggle variant="warning" id="dropdown-basic">
-                            {this.state.memberName}
-                        </Dropdown.Toggle>
-
-                        <Dropdown.Menu>
-                            {this.state.members.length > 0 ? this.state.members.map((ele,index) => {
-                                return <Dropdown.Item key={index} onClick={() => this.setState({memberName: ele?.FullName, memberObject: ele})}>{ele?.FullName}</Dropdown.Item>
-                            }) : null} 
-                        </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Dropdown>
+                    <Dropdown style={{marginTop: "10px"}}>
                         <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                             {this.state.coachName}
                         </Dropdown.Toggle>
@@ -174,7 +162,18 @@ export class Training extends Component{
                         </Dropdown.Menu>
                     </Dropdown>
 
-                    <Dropdown>
+                    <Dropdown style={{marginTop: "10px"}}>
+                        <Dropdown.Toggle variant="warning" id="dropdown-basic">
+                            {this.state.memberName}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {this.state.members.length > 0 ? this.state.members.map((ele,index) => {
+                                return <Dropdown.Item key={index} onClick={() => this.setState({memberName: ele?.FullName, memberObject: ele})}>{ele?.FullName}</Dropdown.Item>
+                            }) : null} 
+                        </Dropdown.Menu>
+                    </Dropdown>
+
+                    <Dropdown style={{marginTop: "10px"}}>
                         <Dropdown.Toggle variant="success" id="dropdown-basic">
                             {this.state.sportName}
                         </Dropdown.Toggle>
@@ -190,7 +189,7 @@ export class Training extends Component{
                     <Modal.Footer>
                     <Button variant="primary" onClick={() => {
                         if(this.state.dateTime === null){
-                            window.alert("date time picker is null");
+                            window.alert("Date time picker is null");
                         }
                         else if(this.state.coachObject === null)
                         {
@@ -214,19 +213,19 @@ export class Training extends Component{
                         }
 
                         this.setState({modalShow: false,  dateTime: new Date(),
-                            coachName: "select coach",
+                            coachName: "Select Coach",
                             coachObject: null,
-                            memberName : "select member",
+                            memberName : "Select Member",
                             memberObject: null,
-                            sportName: "select sport",
+                            sportName: "Select Sport",
                             sportObject: null})
                 }}>Save</Button>
                     <Button variant="danger" onClick={() => this.setState({modalShow: false , dateTime: new Date(),
-                                        coachName: "select coach",
+                                        coachName: "Select Coach",
                                         coachObject: null,
-                                        memberName : "select member",
+                                        memberName : "Select Member",
                                         memberObject: null,
-                                        sportName: "select sport",
+                                        sportName: "Select Sport",
                                         sportObject: null})}>Close</Button>
                     </Modal.Footer>
                 </Modal>

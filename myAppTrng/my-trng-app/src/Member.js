@@ -2,7 +2,6 @@ import React,{Component} from 'react';
 import axios from 'axios'
 import {Table, Button, Modal, Form} from "react-bootstrap";
 
-
 export class Member extends Component{
 
     state = {
@@ -62,6 +61,9 @@ export class Member extends Component{
                 const memberDel = response.data;
                 this.setState( {members: this.state.members.filter(el => el.MemberID !== memberDel)});
             }) 
+            .catch((err) => {
+                window.alert("This member can't be deleted because it is assigned to one or more training.");
+                })            
     }
 
     updateMember = (data) =>
@@ -107,19 +109,20 @@ export class Member extends Component{
                     size="lg"
                     aria-labelledby="contained-modal-title-vcenter"
                     centered>
+
                     <Modal.Header closeButton>
                         <Modal.Title id="contained-modal-title-vcenter">
                         Create or Edit Member
                         </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
 
+                    <Modal.Body>
                     <Form.Group >
                         <Form.Label>Full Name: </Form.Label>
-                        <Form.Control type="text" onChange={this.handleFullNameChange} value={this.state.memberFullName} placeholder="Full name input"/>
+                        <Form.Control type="text" onChange={this.handleFullNameChange} value={this.state.memberFullName} placeholder="Full Name input"/>
 
                         <Form.Label>Phone Number: </Form.Label>
-                        <Form.Control type="text" onChange={this.handlePhoneNumberChange} value={this.state.memberPhoneNumber} placeholder="Phone number input"/> 
+                        <Form.Control type="text" onChange={this.handlePhoneNumberChange} value={this.state.memberPhoneNumber} placeholder="Phone Number input"/> 
 
                         <Form.Label>Email: </Form.Label>
                         <Form.Control type="text" onChange={this.handleEmailChange} value={this.state.memberEmail} placeholder="Email input"/> 
@@ -205,7 +208,7 @@ export class Member extends Component{
                         <td>{ele.PhoneNumber}</td>
                         <td>{ele.Email}</td>
                         <td>{ele.MembershipType}</td>
-                        <th> <Button  variant="success" onClick={() => this.setState({modalShow: true,
+                        <th> <Button  variant="warning" onClick={() => this.setState({modalShow: true,
                                                                                         createOrUpdate: "update",
                                                                                         memberIdTmp : ele.MemberID,
                                                                                         memberFullName : ele.FullName,

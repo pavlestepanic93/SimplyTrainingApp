@@ -30,6 +30,10 @@ namespace AppForTrainings.Controllers
         public ActionResult<IEnumerable<Training>> GetValues()
         {
             var trainings = _trainingRepo.Get();
+            if (trainings == null)
+            {
+                return NotFound("Getting null for trainings");
+            }
             return Ok(trainings);
         }
 

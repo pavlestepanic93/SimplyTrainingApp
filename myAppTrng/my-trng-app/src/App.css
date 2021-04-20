@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  border: #61dafb solid 5px;
 }
 
 .App-logo {
@@ -38,7 +39,7 @@
 }
 
 .linkcss{
-  background-color: #152fc5e0; /* Green */
+  background-color: #454d55;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -51,7 +52,7 @@
   width: 150px;
 }
 .linkcss:hover{
-  background-color: gray; /* Green */
+  background-color: gray;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -61,6 +62,19 @@
   font-size: 16px;
   margin: 10px;
   border-radius: 12px;
+}
+.linkcss1{
+  background-color: #152fc5e0;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px;
+  border-radius: 12px;
+  width: 150px;
 }
 .container{
   text-align: center;

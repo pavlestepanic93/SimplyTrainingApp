@@ -24,6 +24,10 @@ namespace AppForTrainings.Controllers
         public ActionResult<IEnumerable<Sport>> GetValues()
         {
             var sports = _sportRepo.Get();
+            if (sports == null)
+            {
+                return NotFound("Getting null for sports");
+            }
             return Ok(sports);
         }
 

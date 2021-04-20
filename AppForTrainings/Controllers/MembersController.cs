@@ -27,13 +27,6 @@ namespace AppForTrainings.Controllers
             return Ok(members);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Member>> GetById(int? id)
-        {
-            var member = _memberRepo.GetById(id);
-            return Ok(member);
-        }
-
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] Member member)
         {
@@ -69,5 +62,6 @@ namespace AppForTrainings.Controllers
             await _memberRepo.Delete(id);
             return Ok(id);
         }
+
     }
 }
