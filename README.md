@@ -1,11 +1,5 @@
 # SimplyTrainingApp
 
-Good day to everyone,
-
-Here you can find a link to the github repository with the solution of the task. Please read the short README.md file.
-
-For second criterion is concerned, I decided to show the frontend in React, which consumes Web API.
-
 There are 3 folders:
 -C# code server part
 -SQL script for seeding the initial data
